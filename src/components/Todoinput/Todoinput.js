@@ -1,31 +1,33 @@
-import { useState , useRef } from "react"
-
-function TodoInput({onAddData}){ // truyen props tu ben kia vao
-    const [save, setSave] = useState("")
-    const focusInput = useRef(null) //1. tao ref vao input
+import { useRef, useState } from "react"
+import ToDoInputView from "../TodoView/TodoInputview.js"
+function TodoInput({onSave, nodeDataArr}){
+    const [inputValue, setInputValue] = useState("")
+    //focusInput
+    const inputFocus = useRef(null)
+    //
     const handleSave = () => {
-        if(save.trim() !== ""){ // kra neu co khoang trong thi khong thuc hien luu
-            onAddData(save);
-            setSave("") //clear input
-            focusInput.current.focus()
-        }
+        //luu array vao bien nay de luu vao State ben cha (Todolist)
+        const inputArr = ([...nodeDataArr, inputValue])
+        onSave(inputArr)// tien hanh luu
+
+        setInputValue("")
+        inputFocus.current.focus()
     }
-
-
-    return(
-        <div>
-            <div style={{padding: 20}}>My To Do List</div>
-            <div style={{padding: 10}}>
-                <input
-                    ref={focusInput} //2. gan ref vao input
-                    placeholder="Type here..."
-                    value={save}
-                    onChange={(e) => setSave(e.target.value)}
-                />
-                <button  style={{marginLeft: 20}} onClick={handleSave}>Save!</button>
+    return (
+        <div style={{padding: 20}}>
+            <div>
+                <strong>Please Add Some Note!</strong>
             </div>
+            <input  
+                ref={inputFocus}
+                placeholder="Type here..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button onClick={handleSave}>Save!</button>
+            <div style={{marginTop: 20}}/>
+            <ToDoInputView onSetInputView={nodeDataArr}/>
         </div>
     )
 }
-
 export default TodoInput

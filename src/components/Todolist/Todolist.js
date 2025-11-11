@@ -1,47 +1,15 @@
+import TodoInput from "../Todoinput/Todoinput.js"
+import TodoFilter from "../Todofilter/Todofilter.js"
 import { useState } from "react"
-import TodoInput from "../Todoinput/Todoinput"
 function TodoList(){
-    const [datas, setDatas] = useState([ ])
-
-    const handleAddData = (save) => {
-        setDatas((prev) => [...prev, save])
-    } 
-
-    // const handleDelete = (deteleItem) => {
-    //     setDatas(prev => prev.filter((item) => {
-    //             return item !== deteleItem     //tra ve nhung phan tu khac voi deleteItem khi no truyen vao ben duoi
-    //         })
-    //     )
-    // };
-
-    const handleDelete = (deleteItem) => {
-        setDatas((preValue) => {
-            const seData = preValue.filter((item) => { //filter chi tra ra true/false
-                const result = item !== deleteItem
-                return result
-            })
-            return seData
-        })
-    }
+    // cap nhat State(gia tri tu mang vao day de truyen di cho Filter)
+    // dong thoi hien thi cho InputView (nang len State Cha)
+    const [inputArr, setInputArr] = useState([])
     return(
-       <div>
-            {/* Truyen props vao compornet trc de nhan data tu todoInput */}
-            <TodoInput onAddData={handleAddData}/> 
-            <div style={{marginLeft: 10,fontWeight: 500}}>
-                My listed:
-                <ul>
-                    {datas.map((saveData, index) => {
-                        return <div key={index} style={{display: "flex", marginTop: 12}}>
-                                <li> {saveData} </li>
-                                <button  
-                                    style={{marginLeft: 12}}
-                                    onClick={() => handleDelete(saveData)}> Delete </button>
-                        </div>
-                    })}
-                </ul>
-            </div>
-       </div>
+     <div>
+        <TodoInput onSave={setInputArr} nodeDataArr = {inputArr}/>
+        <TodoFilter nodeDataArr = {inputArr}/>
+     </div>   
     )
 }
-
 export default TodoList
