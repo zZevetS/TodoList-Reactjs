@@ -35,7 +35,8 @@ function TodoFilter({nodeDataArr}){
                 onChange= {(e) => setSearchInput(e.target.value)}
             />
             <button onClick={handleSearch}>Search!</button>
-            <div style={{marginTop: 20, color: "red"}}>{errorText}</div>
+            {/* Thong bao loi */}
+            <div style={{marginTop: 20, color: "red"}}>{errorText}</div> 
             <TodoFilterView onFilterList={searchArr}/>
         </div>
     )

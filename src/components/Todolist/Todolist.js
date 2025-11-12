@@ -7,7 +7,7 @@ function TodoList(){
     const [inputArr, setInputArr] = useState([])
     return(
      <div>
-        <TodoInput onSave={setInputArr} nodeDataArr = {inputArr}/>
+        <TodoInput  nodeDataArr = {inputArr} onSetSave={setInputArr}/>
         <TodoFilter nodeDataArr = {inputArr}/>
      </div>   
     )
